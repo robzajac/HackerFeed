@@ -8,12 +8,24 @@ module.exports = function (app) {
   router.use(isAuthenticated(app));
 
   router.get('/getlinks', function (req, res) {
-    // TODO get saved links for a user
+    User.getLinks(req.user._id)
+      .then((links) => {
+        res.json({ res: 'success', data: links });
+      })
+      .catch((err) => {
+        res.json({ res: 'failure', data: err });
+      });
   });
 
   
   router.post('/addlink', function (req, res) {
-    // TODO add link for the user
+    User.addLink(req.user._id, req.body.link)
+      .then((user) => {
+        res.json({ res: 'success', data: user.links });
+      })
+      .catch((err) => {
+        res.json({ res: 'failure', data: err });
+      });
   });
 
   return router;

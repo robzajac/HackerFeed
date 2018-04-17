@@ -41,3 +41,10 @@ userSchema.statics.addLink = function (id, link) {
       user.save();
     });
 };
+
+userSchema.statics.getLinks = function (id) {
+  return this.findOne({ _id: id})
+    .then((user) => {
+      return user.links;
+    });
+};

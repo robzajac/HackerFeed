@@ -38,7 +38,7 @@ userSchema.statics.addLink = function (id, link) {
   return this.findOne({ _id: id })
     .then((user) => {
       user.links.push(link);
-      user.save();
+      return user.save();
     });
 };
 
@@ -48,3 +48,5 @@ userSchema.statics.getLinks = function (id) {
       return user.links;
     });
 };
+
+module.exports = mongoose.model('User', userSchema);

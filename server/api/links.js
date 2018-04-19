@@ -19,6 +19,7 @@ module.exports = function (app) {
 
   
   router.post('/addlink', function (req, res) {
+    console.log(req.user);
     User.addLink(req.user._id, req.body.link)
       .then((user) => {
         res.json({ res: 'success', data: user.links });

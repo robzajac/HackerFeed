@@ -6,7 +6,7 @@ import {
 
 import Navbar from './Navbar';
 import SignIn from './SignIn';
-// import SignUp from './SignUp';
+import SignUp from './SignUp';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class App extends Component {
   }
 
   // TODO check for authenticatiion in default route, direct to feed if auth'd
-  // <Route path="/signup" component={SignUp} />
   render() {
     return (
       <div className="container-fluid">
@@ -23,10 +22,12 @@ class App extends Component {
           <Route store={this.props.store} path="/signin"
             render={() => <SignIn store={this.props.store} />}
           />
+          <Route store={this.props.store} path="/signup"
+            render={() => <SignUp store={this.props.store} />}
+          />
           
           <Route store={this.props.store} render={() => <SignIn store={this.props.store} />} />
         </Switch>
-        <p>test</p>
       </div>
     );
   }

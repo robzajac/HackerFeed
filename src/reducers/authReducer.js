@@ -6,7 +6,9 @@ import {
   REGISTER_REJ,
 } from '../actions/auth';
 
-const mainReducer = (state, action) => {
+var auth = (state = {
+  isAuthenticated: localStorage.getItem('token') ? true : false,
+}, action) => {
   switch (action.type) {
     case LOGIN_FUL:
     case REGISTER_FUL:
@@ -22,8 +24,6 @@ const mainReducer = (state, action) => {
     default:
       return state;
   }
-
-  return state;
 };
 
-export { mainReducer };
+export default auth;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { registerUser } from '../actions/auth';
 
 class SignUp extends Component {
@@ -10,21 +11,21 @@ class SignUp extends Component {
   componentDidMount() {
     // If  the user is authenticated,
     // change the location to /feed
-    if (this.props.store.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/feed');
     }
   }
 
   componentDidUpdate() {
     // Same as didMount
-    if (this.props.store.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/feed');
     }
   }
 
   signup(e) {
     e.preventDefault();
-    let { dispatch } = this.props.store;
+    let { dispatch } = this.props;
     let username = this.refs.rusername.value;
     let password = this.refs.rpassword.value;
     let name = this.refs.name.value;
@@ -86,4 +87,9 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(SignUp);
+function mapStateToProps(state) {
+  const { authReducer } = state;
+  return authReducer;
+}
+
+export default withRouter(connect(mapStateToProps)(SignUp));

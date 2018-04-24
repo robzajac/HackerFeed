@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-export default function requiresAuth(Component, props) {
+export default function requiresAuth(Component) {
   class AuthHOC extends React.Component {
 
     componentDidMount() {
@@ -14,9 +14,9 @@ export default function requiresAuth(Component, props) {
     }
 
     checkIfLoggedIn() {
-      const isAuthenticated = this.props.store.isAuthenticated;
+      const isAuthenticated = this.props;
       if (!isAuthenticated) {
-        this.props.store.rejectLogin();
+        this.props.rejectLogin();
         this.props.history.push('/signin');
       }
     }
@@ -24,11 +24,27 @@ export default function requiresAuth(Component, props) {
     render() {
       return (
         <div>
-          { this.props.store.isAuthenticated ? <Component {...this.props} /> : null }
+          { this.props.isAuthenticated ? <Component {...this.props} /> : <p>Please sign in</p> }
         </div>
       );
     }
   }
 
-  return withRouter(AuthHOC);
+  const mapStateToProps = (state) => {
+    // only look at  the auth reducer
+    const { authReducer } = state;
+    const { isAuthenticated } = authReducer;
+    return {
+      isAuthenticated
+    };
+  };
+
+  const mapDispatchToProps = dispatch => ({
+    rejectLogin: () => dispatch({
+      type: 'LOGIN_REJ',
+      error: 'You aren\'t authenticated',
+    }),
+  });
+
+  return withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthHOC));
 }

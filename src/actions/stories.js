@@ -10,11 +10,11 @@ export function getStoryIDs() {
     .then((res) => {
       dispatch({
         type: LOADSTORIES_FUL,
-        storyIDs: res.data
+        storyIDs: res
       });
     }).catch((err) => {
       dispatch({
-        type: LOADSTORES_REJ,
+        type: LOADSTORIES_REJ,
         error: err
       });
     });

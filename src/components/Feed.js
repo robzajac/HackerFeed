@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { getStoryIDs } from '../actions/stories';
+import { connect } from 'react-redux';
+
+import StoryList from './StoryList';
 
 class Feed extends Component {
   constructor(props) {
@@ -8,7 +12,6 @@ class Feed extends Component {
   render() {
     return (
       <div className="container">
-        <h2>News Feed</h2>
         <div className="row">
           <div className="col-md-12">
             <StoryList loadStories={this.props.loadStories} />
@@ -20,7 +23,8 @@ class Feed extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loadStories: () => dispatch(loadStories()),
+  // TODO change this to loading actual stories
+  loadStories: () => dispatch(getStoryIDs())
 });
 
 export default connect(null, mapDispatchToProps)(Feed);

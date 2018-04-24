@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { loginUser } from '../actions/auth';
 
 class SignIn extends Component {
   constructor(props) {
@@ -23,7 +24,13 @@ class SignIn extends Component {
 
   signin(e) {
     e.preventDefault();
-    // TODO handle signin
+    let { dispatch } = this.props.store;
+    let username = this.refs.username.value;
+    let password = this.refs.password.value;
+    dispatch(loginUser({
+      username,
+      password
+    }));
   }
 
   render() {
@@ -67,4 +74,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

@@ -7,26 +7,27 @@ import {
 import Navbar from './Navbar';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Feed from './Feed';
+import AuthHOC from './AuthHOC';
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
-  // TODO check for authenticatiion in default route, direct to feed if auth'd
   render() {
     return (
       <div className="container-fluid">
-        <Navbar store={this.props.store} />
+        <Navbar />
         <Switch>
-          <Route store={this.props.store} path="/signin"
-            render={() => <SignIn store={this.props.store} />}
-          />
-          <Route store={this.props.store} path="/signup"
-            render={() => <SignUp store={this.props.store} />}
-          />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/feed" 
+            render={() => this.props.store.isAuthenticated ? 
+              <Feed store={this.props.store} /> : 
+              <SignIn store={this.props.store} />} />
           
-          <Route store={this.props.store} render={() => <SignIn store={this.props.store} />} />
+          <Route render={() => <SignIn store={this.props.store} />} />
         </Switch>
       </div>
     );

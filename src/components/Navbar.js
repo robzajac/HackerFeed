@@ -10,7 +10,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <a className="navbar-brand" href="/">HackerFeed</a>
-        { this.props.store.isAuthenticated ?
+        { this.props.isAuthenticated ?
           (
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -49,4 +49,9 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  let { authReducer } = state;
+  return authReducer;
+};
+
+export default connect(mapStateToProps, null)(Navbar);

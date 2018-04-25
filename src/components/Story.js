@@ -20,8 +20,16 @@ class Story extends Component {
     // TODO: add rank (number of upvotes)
     let url = this.props.story.url ? getHost(this.props.story.url) : "";
     let saveButton = this.props.story.url ?
-      (<a onClick={() => this.props.saveLink(this.props.story.url)} className="btn btn-primary">
-        Save link
+      (<a 
+        onClick={(e) => {
+          this.props.saveLink(this.props.story.url);
+          e.target.style.backgroundColor = '#008000';
+          e.target.text = 'Saved';
+        }} 
+        className="btn btn-primary"
+        style={{color: "white"}}
+        >
+          Save link
       </a>) : "";
     return (
       <div className="card" style={cardStyles}>

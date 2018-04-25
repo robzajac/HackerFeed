@@ -16,6 +16,7 @@ class Story extends Component {
 
     return (
       <div className="card" style={cardStyles}>
+        <p>test</p>
         <p>{this.props.story.title}</p>
         <p>{this.props.story.url}</p>
       </div>

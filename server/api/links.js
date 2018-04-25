@@ -19,13 +19,20 @@ module.exports = function (app) {
 
   
   router.post('/addlink', function (req, res) {
-    console.log(req.user);
-    User.addLink(req.user._id, req.body.link)
-      .then((user) => {
-        res.json({ res: 'success', data: user.links });
-      })
-      .catch((err) => {
-        res.json({ res: 'failure', data: err });
+    User.getLinks(req.user._id)
+      .then((links) => {
+        // Check for containment
+        if (links.indexOf(req.body.link) < 0) {
+          User.addLink(req.user._id, req.body.link)
+          .then((user) => {
+            res.json({ res: 'success', data: user.links });
+          })
+          .catch((err) => {
+            res.json({ res: 'failure', data: err });
+          });
+        } else {
+          res.json({ res: 'failure', data: 'Link already saved'});
+        }
       });
   });
 

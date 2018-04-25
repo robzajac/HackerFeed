@@ -18,10 +18,11 @@ class Story extends Component {
     // TODO: add comments
     // TODO: add date/time
     // TODO: add rank (number of upvotes)
+    let url = this.props.story.url ? getHost(this.props.story.url) : "";
     return (
       <div className="card" style={cardStyles}>
         <a href={this.props.story.url}>{this.props.story.title}</a>
-        <p>{getHost(this.props.story.url)}</p>
+        <p>{url}</p>
       </div>
     );
   }

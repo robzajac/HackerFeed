@@ -16,6 +16,8 @@ class Story extends Component {
 
     // TODO: add bookmark icon/implement bookmark actions
     // TODO: add comments
+    // TODO: add date/time
+    // TODO: add rank (number of upvotes)
     return (
       <div className="card" style={cardStyles}>
         <a href={this.props.story.url}>{this.props.story.title}</a>

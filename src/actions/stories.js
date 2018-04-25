@@ -24,14 +24,12 @@ export function loadStories() {
   return (dispatch) => {
     loadStoryIDs()
     .then((ids) => {
-      console.log("start load");
-      let loads = ids.splice(0,50).map(id => 
+      let loads = ids.splice(0,30).map(id => 
         fetch('https://hacker-news.firebaseio.com/v0/item/' + id + '.json', {method: 'GET'})
         .then(response => {
           return response.json();
         })
       );
-      console.log("loads loaded", loads);
       Promise.all(loads).then(stories => {
         dispatch({
           type: LOADSTORIES_FUL,

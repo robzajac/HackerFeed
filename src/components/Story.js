@@ -14,14 +14,31 @@ class Story extends Component {
       padding: '10px',
     };
 
+    // TODO: add bookmark icon/implement bookmark actions
+    // TODO: add comments
     return (
       <div className="card" style={cardStyles}>
-        <p>test</p>
-        <p>{this.props.story.title}</p>
-        <p>{this.props.story.url}</p>
+        <a href={this.props.story.url}>{this.props.story.title}</a>
+        <p>{getHost(this.props.story.url)}</p>
       </div>
     );
   }
+}
+
+function getHost(link) {
+    var host;
+
+    if (link.indexOf("://") > -1) {
+        host = link.split('/')[2];
+    }
+    else {
+        host = link.split('/')[0];
+    }
+
+    host = host.split(':')[0];
+    host = host.split('?')[0];
+
+    return host;
 }
 
 export default Story;

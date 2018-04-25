@@ -12,12 +12,8 @@ class Feed extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <StoryList loadStories={this.props.loadStories} />
-          </div>
-        </div>
+      <div className="container" style={{'margin-left': '0px'}}>
+        <StoryList loadStories={this.props.loadStories} />        
       </div>
     );
   }

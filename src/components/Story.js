@@ -31,11 +31,24 @@ class Story extends Component {
         >
           Save link
       </a>) : "";
+    let date = new Date(this.props.story.time*1000);
+    let today = new Date();
+    let dateString = (today.getHours() - date.getHours()) + " hours ago";
     return (
-      <div className="card" style={cardStyles}>
-        <a href={this.props.story.url}>{this.props.story.title}</a>
-        <p>{url}</p>
-        {saveButton}
+      <div className="row">
+        <div className="col-md-4" style={{'padding-right': '0px'}}>
+          <div className="panel panel-default card" style={cardStyles}>
+            <div className="panel-heading">{this.props.story.score} points</div>
+            <div className="panel-body">{dateString}</div>
+          </div>
+        </div>
+        <div className="col-md-8">
+          <div className="card" style={cardStyles}>
+            <a href={this.props.story.url}>{this.props.story.title}</a>
+            <p>{url}</p>
+            {saveButton}
+          </div>
+        </div>
       </div>
     );
   }

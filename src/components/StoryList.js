@@ -17,7 +17,7 @@ class StoryList extends Component {
     }
 
     return (
-      <div className="col-md-12">
+      <div className="container">
         { stories }
       </div>
     );

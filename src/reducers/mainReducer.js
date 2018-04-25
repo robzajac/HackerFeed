@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import storyListReducer from './storyListReducer';
-import storyReducer from './storyReducer';
+import linkReducer from './linkReducer';
 
 // TODO add more reducers as needed
 const reducers = combineReducers({
   authReducer,
-  storyListReducer
+  storyListReducer,
+  linkReducer
 });
 
 export default reducers;

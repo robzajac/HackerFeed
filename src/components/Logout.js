@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { logOut } from '../actions/auth';
 
 class Logout extends React.Component {
+  
   componentDidMount() {
     let { dispatch } = this.props;
     dispatch(logOut());

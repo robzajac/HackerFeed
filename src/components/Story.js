@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadStory } from '../actions/stories';
+import { saveLink } from '../actions/links';
 
 class Story extends Component {
 
@@ -14,15 +15,19 @@ class Story extends Component {
       padding: '10px',
     };
 
-    // TODO: add bookmark icon/implement bookmark actions
     // TODO: add comments
     // TODO: add date/time
     // TODO: add rank (number of upvotes)
     let url = this.props.story.url ? getHost(this.props.story.url) : "";
+    let saveButton = this.props.story.url ?
+      (<a onClick={() => this.props.saveLink(this.props.story.url)} className="btn btn-primary">
+        Save link
+      </a>) : "";
     return (
       <div className="card" style={cardStyles}>
         <a href={this.props.story.url}>{this.props.story.title}</a>
         <p>{url}</p>
+        {saveButton}
       </div>
     );
   }
@@ -44,4 +49,9 @@ function getHost(link) {
     return host;
 }
 
-export default Story;
+const mapDispatchToProps = dispatch =>
+  ({
+    saveLink: link => dispatch(saveLink(link)),
+  });
+
+export default connect(null, mapDispatchToProps)(Story);

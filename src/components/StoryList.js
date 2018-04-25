@@ -10,10 +10,12 @@ class StoryList extends Component {
   }
 
   render() {
-    let stories = this.props.storyIDs.map((id) => (
-      <Story id={id} />
-    ));
-    
+    let stories = [];
+
+    for (var i = 0; i < this.props.stories.length; i++) {
+      stories.push(<Story story={this.props.stories[i]} />);
+    }
+
     return (
       <div className="col-md-12">
         { stories }
@@ -22,7 +24,7 @@ class StoryList extends Component {
   }
 }
 
-const mapStateToProps = state => state.storyListReducer ;
+const mapStateToProps = state => state.storyListReducer;
 
 export default connect(
   mapStateToProps,

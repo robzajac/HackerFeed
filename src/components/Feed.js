@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { getStoryIDs } from '../actions/stories';
 import { connect } from 'react-redux';
+import { loadStories } from '../actions/stories';
 
 import StoryList from './StoryList';
 
 class Feed extends Component {
+
   constructor(props) {
     super(props);
   }
@@ -23,8 +24,7 @@ class Feed extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  // TODO change this to loading actual stories
-  loadStories: () => dispatch(getStoryIDs())
+  loadStories: () => dispatch(loadStories())
 });
 
 export default connect(null, mapDispatchToProps)(Feed);

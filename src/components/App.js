@@ -11,6 +11,7 @@ import Feed from './Feed';
 import AuthHOC from './AuthHOC';
 import Logout from './Logout';
 import SavedLinks from './SavedLinks';
+import Flashes from './Flashes';
 
 class App extends Component {
   
@@ -22,6 +23,7 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <Navbar />
+        <Flashes />
         <div>
           <Switch>
             <Route path="/signin" component={SignIn} />
